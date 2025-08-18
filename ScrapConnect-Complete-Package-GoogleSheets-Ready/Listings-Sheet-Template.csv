@@ -1,0 +1,4 @@
+ID,CustomerName,CustomerPhone,Category,Quantity,Unit,Description,ImageUrls,Address,Lat,Lng,Status,PostedDate,EstimatedPrice,CreatedAt
+DEMO001,Raj Kumar,+91-9876543210,Paper,50,kg,Old newspapers and magazines,[],MG Road Sector 14 Gurgaon Haryana,28.4595,77.0266,available,2025-08-17,₹150-200,2025-08-17T10:30:00.000Z
+DEMO002,Priya Sharma,+91-8765432109,Electronics,5,pieces,Old mobile phones and chargers,[],DLF Phase 2 Gurgaon Haryana,28.4743,77.1017,available,2025-08-16,₹750-1000,2025-08-16T14:20:00.000Z
+DEMO003,Arjun Singh,+91-7654321098,Metal,25,kg,Iron scraps and aluminum cans,[],Cyber City Gurgaon Haryana,28.4956,77.0919,available,2025-08-15,₹1000-1200,2025-08-15T09:15:00.000Z

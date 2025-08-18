@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrapConnect - Waste Collection Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻️</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Landing Screen -->
+        <div id="landing-screen" class="screen active">
+            <div class="container">
+                <div class="hero-section">
+                    <div class="app-logo">
+                        <div class="logo-icon">♻️</div>
+                        <h1>ScrapConnect</h1>
+                        <p class="tagline">Connect customers with scrap dealers instantly</p>
+                    </div>
+                </div>
+
+                <div class="role-selection">
+                    <h2>Choose your role</h2>
+                    <div class="role-cards">
+                        <div class="role-card" data-role="customer" onclick="selectRole(this, 'customer')">
+                            <div class="role-icon">📦</div>
+                            <h3>Customer</h3>
+                            <p>Sell your scrap items</p>
+                            <small>Get best prices for your waste</small>
+                        </div>
+                        <div class="role-card" data-role="dealer" onclick="selectRole(this, 'dealer')">
+                            <div class="role-icon">🚚</div>
+                            <h3>Dealer</h3>
+                            <p>Buy scrap from customers</p>
+                            <small>Grow your scrap business</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Input Screen -->
+        <div id="phone-screen" class="screen">
+            <div class="container">
+                <div class="header">
+                    <button class="back-btn" onclick="goBack()">←</button>
+                    <h2>Register</h2>
+                </div>
+
+                <div class="form-container">
+                    <div class="form-icon">📱</div>
+                    <h3>Enter your phone number</h3>
+                    <p class="subtitle">We'll create your account instantly</p>
+
+                    <div class="phone-input-group">
+                        <select class="country-code" disabled>
+                            <option>+91</option>
+                        </select>
+                        <input type="tel" id="phone-input" placeholder="Enter phone number" maxlength="10" required>
+                    </div>
+
+                    <button class="btn-primary" onclick="registerUser()">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loading hidden">Creating...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Screen -->
+        <div id="main-screen" class="screen">
+            <!-- App Header -->
+            <div class="app-header">
+                <div class="user-info">
+                    <div class="avatar">👤</div>
+                    <div class="user-details">
+                        <span id="user-name">User</span>
+                        <span id="user-role">Customer</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn" onclick="showNotifications()">🔔</button>
+                    <button class="location-btn" onclick="showCurrentLocation()">📍</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Home Tab (Customer) -->
+                <div id="home-tab" class="tab-pane active">
+                    <div class="section-header">
+                        <h2>Sell Your Scrap</h2>
+                        <p>Turn your waste into money</p>
+                    </div>
+
+                    <div class="category-section">
+                        <h3>Select Category</h3>
+                        <div class="category-grid">
+                            <div class="category-card" onclick="selectCategory(this, 'Paper')">
+                                <div class="category-icon">📄</div>
+                                <span>Paper</span>
+                                <small>₹3/kg</small>
+                            </div>
+                            <div class="category-card" onclick="selectCategory(this, 'Plastic')">
+                                <div class="category-icon">🥤</div>
+                                <span>Plastic</span>
+                                <small>₹12/kg</small>
+                            </div>
+                            <div class="category-card" onclick="selectCategory(this, 'Metal')">
+                                <div class="category-icon">🔩</div>
+                                <span>Metal</span>
+                                <small>₹45/kg</small>
+                            </div>
+                            <div class="category-card" onclick="selectCategory(this, 'Electronics')">
+                                <div class="category-icon">📱</div>
+                                <span>Electronics</span>
+                                <small>₹150/pc</small>
+                            </div>
+                            <div class="category-card" onclick="selectCategory(this, 'Glass')">
+                                <div class="category-icon">🍾</div>
+                                <span>Glass</span>
+                                <small>₹2/kg</small>
+                            </div>
+                            <div class="category-card" onclick="selectCategory(this, 'Cardboard')">
+                                <div class="category-icon">📦</div>
+                                <span>Cardboard</span>
+                                <small>₹4/kg</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label>Quantity & Unit</label>
+                            <div class="quantity-group">
+                                <input type="number" id="quantity-input" placeholder="Enter quantity" min="1">
+                                <select id="unit-select">
+                                    <option value="kg">kg</option>
+                                    <option value="pieces">pieces</option>
+                                    <option value="tons">tons</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Photos</label>
+                            <div class="photo-upload" onclick="document.getElementById('photo-input').click()">
+                                <input type="file" id="photo-input" multiple accept="image/*" onchange="handlePhotoUpload(this)" style="display: none;">
+                                <div class="upload-placeholder">
+                                    <div class="upload-icon">📷</div>
+                                    <p>Add photos of your scrap</p>
+                                    <small>Tap to upload images</small>
+                                </div>
+                            </div>
+                            <div id="photo-preview" class="photo-preview-grid"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="description-input" placeholder="Describe your scrap items..." rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Pickup Address</label>
+                            <textarea id="address-input" placeholder="Enter your complete address..." rows="2" required></textarea>
+                            <button class="location-btn" onclick="getCurrentLocation()" type="button">
+                                📍 Use Current Location
+                            </button>
+                        </div>
+
+                        <button class="btn-primary" onclick="createListing()">
+                            <span class="btn-text">Submit Listing</span>
+                            <span class="btn-loading hidden">Creating...</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Tab (Dealer) -->
+                <div id="dashboard-tab" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Dealer Dashboard</h2>
+                        <p>Manage your scrap collection business</p>
+                    </div>
+
+                    <div class="dealer-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <h3 id="total-collections">0</h3>
+                                <p>Total Collections</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-content">
+                                <h3 id="monthly-revenue">₹0</h3>
+                                <p>Monthly Revenue</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-content">
+                                <h3 id="pending-pickups">0</h3>
+                                <p>Pending Pickups</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="recent-activity-list" class="activity-list">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marketplace Tab -->
+                <div id="marketplace-tab" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Available Scrap</h2>
+                        <div class="filter-section">
+                            <select id="category-filter" onchange="filterListings()">
+                                <option value="">All Categories</option>
+                                <option value="Paper">Paper</option>
+                                <option value="Plastic">Plastic</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Glass">Glass</option>
+                                <option value="Cardboard">Cardboard</option>
+                            </select>
+                            <select id="distance-filter" onchange="filterListings()">
+                                <option value="">All Distances</option>
+                                <option value="5">Within 5km</option>
+                                <option value="10">Within 10km</option>
+                                <option value="25">Within 25km</option>
+                            </select>
+                            <button class="refresh-btn" onclick="loadMarketplaceListings()">🔄</button>
+                        </div>
+                    </div>
+
+                    <div id="listings-container" class="listings-grid">
+                        <!-- Dynamic listings will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Map Tab -->
+                <div id="map-tab" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Scrap Locations</h2>
+                        <button class="location-btn" onclick="showCurrentLocation()">📍 My Location</button>
+                    </div>
+
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <div class="map-icon">🗺️</div>
+                            <h3>Interactive Map</h3>
+                            <p>Scrap locations near you</p>
+                            <button class="btn-primary" onclick="openFullMap()">Open Google Maps</button>
+                        </div>
+                    </div>
+
+                    <div class="nearby-items">
+                        <h3>Nearby Items</h3>
+                        <div id="nearby-items-list">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <div class="map-legend">
+                        <div class="legend-item"><span class="legend-dot paper"></span> Paper</div>
+                        <div class="legend-item"><span class="legend-dot metal"></span> Metal</div>
+                        <div class="legend-item"><span class="legend-dot electronics"></span> Electronics</div>
+                        <div class="legend-item"><span class="legend-dot plastic"></span> Plastic</div>
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div id="history-tab" class="tab-pane">
+                    <div class="section-header">
+                        <h2 id="history-title">My Listings</h2>
+                        <div class="status-filter">
+                            <button class="filter-btn active" onclick="filterByStatus('all')">All</button>
+                            <button class="filter-btn" onclick="filterByStatus('active')">Active</button>
+                            <button class="filter-btn" onclick="filterByStatus('completed')">Completed</button>
+                        </div>
+                    </div>
+
+                    <div id="history-container" class="history-list">
+                        <!-- Dynamic history will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-pane">
+                    <div class="profile-header">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h3 id="profile-name">User</h3>
+                            <p id="profile-phone">+91-XXXXXXXXXX</p>
+                            <p id="profile-role-text">Customer Account</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <span class="stat-number" id="profile-total-listings">0</span>
+                            <span class="stat-label">Total Listings</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="profile-total-earnings">₹0</span>
+                            <span class="stat-label">Total Earnings</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="profile-completed-deals">0</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-menu">
+                        <div class="menu-item" onclick="logout()">
+                            <span>🚪 Logout</span>
+                            <span>→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-item active" onclick="switchTab('home')" id="nav-home">
+                    <div class="nav-icon">🏠</div>
+                    <span id="nav-home-text">Home</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('marketplace')" id="nav-marketplace">
+                    <div class="nav-icon">🛒</div>
+                    <span>Market</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('map')" id="nav-map">
+                    <div class="nav-icon">🗺️</div>
+                    <span>Map</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('history')" id="nav-history">
+                    <div class="nav-icon">📋</div>
+                    <span>History</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('profile')" id="nav-profile">
+                    <div class="nav-icon">👤</div>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

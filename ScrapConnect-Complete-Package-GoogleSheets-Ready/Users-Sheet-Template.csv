@@ -1,0 +1,4 @@
+Phone,Role,Name,CreatedAt,IsVerified,Location
++91-9876543210,customer,Raj Kumar,2025-08-17T10:25:00.000Z,TRUE,"{""lat"": 28.4595, ""lng"": 77.0266}"
++91-8765432109,customer,Priya Sharma,2025-08-16T14:15:00.000Z,TRUE,"{""lat"": 28.4743, ""lng"": 77.1017}"
++91-9999888777,dealer,Rohit Dealer,2025-08-17T08:30:00.000Z,TRUE,"{""lat"": 28.4956, ""lng"": 77.0919}"

@@ -1,0 +1,6 @@
+Timestamp,Type,EntityId,Payload
+2025-08-17T10:25:00.000Z,USER_CREATED,+91-9876543210,"{""role"": ""customer""}"
+2025-08-17T10:30:00.000Z,LISTING_CREATED,DEMO001,"{""category"": ""Paper"", ""quantity"": ""50""}"
+2025-08-16T14:15:00.000Z,USER_CREATED,+91-8765432109,"{""role"": ""customer""}"
+2025-08-16T14:20:00.000Z,LISTING_CREATED,DEMO002,"{""category"": ""Electronics"", ""quantity"": ""5""}"
+2025-08-17T08:30:00.000Z,USER_CREATED,+91-9999888777,"{""role"": ""dealer""}"
